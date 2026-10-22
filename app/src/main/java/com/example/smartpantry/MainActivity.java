@@ -21,6 +21,9 @@ public class MainActivity extends AppCompatActivity {
         // Display the home screen
         setContentView(R.layout.activity_main);
 
+        DatabaseHelper dbHelper = new DatabaseHelper(this);
+        dbHelper.getWritableDatabase();
+
         // Connect Java to the XML buttons
         btnMyPantry = findViewById(R.id.btnMyPantry);
         btnAddIngredient = findViewById(R.id.btnAddIngredient);
