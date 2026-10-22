@@ -426,4 +426,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 return value;
         }
     }
+
+    // Find one recipe using its ID.
+    public Cursor getRecipeById(int recipeId) {
+        return getReadableDatabase().rawQuery("SELECT id, name, description, instructions " + "FROM recipes WHERE id = ?",
+                new String[]{String.valueOf(recipeId)}
+        );
+    }
+
 }

@@ -40,11 +40,21 @@ public class MainActivity extends AppCompatActivity {
         btnAddIngredient.setOnClickListener(v ->
                 showMessage("Add Ingredient"));
 
-        btnSuggestedRecipes.setOnClickListener(v ->
-                showMessage("Suggested Recipes"));
+        btnSuggestedRecipes.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this,
+                    SuggestedRecipesActivity.class
+        );
 
-        btnSettings.setOnClickListener(v ->
-                showMessage("Settings"));
+        startActivity(intent);
+    });
+
+        btnSettings.setOnClickListener(v -> {
+            Intent intent = new Intent(
+                    MainActivity.this,
+                    SettingsActivity.class
+            );
+            startActivity(intent);
+        });
     }
 
     private void showMessage(String message) {

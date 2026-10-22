@@ -32,11 +32,16 @@ public class EditIngredientActivity extends Activity {
         editExpiry = findViewById(R.id.editExpiry);
 
         Button btnSave = findViewById(R.id.btnSaveIngredient);
+        btnSave.setText("Update Ingredient");
+        btnSave.setOnClickListener(v -> updateIngredient());
+
+        Button btnDelete = findViewById(R.id.btnDeleteIngredient);
+        btnDelete.setOnClickListener(v -> confirmDelete());
 
         loadIngredient();
 
-        btnSave.setText("Update Ingredient");
-        btnSave.setOnClickListener(v -> updateIngredient());
+
+
     }
 
     private void loadIngredient() {
@@ -106,4 +111,24 @@ public class EditIngredientActivity extends Activity {
             Toast.makeText(this, "Could not update ingredient", Toast.LENGTH_SHORT).show();
         }
     }
+
+    private void confirmDelete() {
+        new android.app.AlertDialog.Builder(this)
+                .setTitle("Delete Ingredient")
+                .setMessage("Are you sure you want to delete this ingredient?")
+                .setPositiveButton("Delete", (dialog, which) -> {
+
+                    boolean deleted = database.deleteIngredient(ingredientId);
+
+                    if (deleted) {
+                        Toast.makeText(this, "Ingredient deleted", Toast.LENGTH_SHORT).show();
+                        finish();
+                    } else {
+                        Toast.makeText(this, "Could not delete ingredient", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton("Cancel", null)
+                .show();
+    }
+
 }
