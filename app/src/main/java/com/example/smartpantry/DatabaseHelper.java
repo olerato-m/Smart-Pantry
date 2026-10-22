@@ -7,7 +7,7 @@ import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
+import android.content.ContentValues;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -73,6 +73,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public boolean deleteIngredient(int id){
         return getWritableDatabase().delete("ingredients", "id = ?", new String[]{String.valueOf(id)}) > 0;
     }
+
+
+    public boolean updateIngredient(int id, String name, double quantity, String unit, String expiryDate) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("name", name);
+        values.put("quantity", quantity);
+        values.put("unit", unit);
+        values.put("expiry_date", expiryDate);
+
+        return db.update("ingredients", values, "id = ?", new String[]{String.valueOf(id)}) > 0;
+    }
+
 
     // Add the sample recipes only when the recipe table is empty.
     private void seedRecipesIfNeeded(){

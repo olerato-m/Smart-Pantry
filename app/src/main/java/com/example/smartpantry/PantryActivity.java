@@ -21,6 +21,7 @@ public class PantryActivity extends Activity {
     private TextView txtPantryCount;
     private ArrayAdapter<String> adapter;
     private ArrayList<String> ingredientNames;
+    private ArrayList<Integer> ingredientIds;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,7 @@ public class PantryActivity extends Activity {
         Button btnAddPantryItem = findViewById(R.id.btnAddPantryItem);
 
         ingredientNames = new ArrayList<>();
+        ingredientIds = new ArrayList<>();
 
         adapter = new ArrayAdapter<>(
                 this,
@@ -42,6 +44,20 @@ public class PantryActivity extends Activity {
         );
 
         listPantry.setAdapter(adapter);
+
+        listPantry.setOnItemClickListener((parent, view, position, id) -> {
+
+            if (position < 0 || position >= ingredientIds.size()) {
+                return;
+            }
+
+            int ingredientId = ingredientIds.get(position);
+
+            Intent intent = new android.content.Intent(PantryActivity.this, EditIngredientActivity.class);
+            intent.putExtra("ingredient_id", (int) id);
+
+            startActivity(intent);
+        });
 
         btnAddPantryItem.setOnClickListener(v -> {
             Intent intent = new Intent(
@@ -57,11 +73,16 @@ public class PantryActivity extends Activity {
 
     private void loadIngredients() {
         ingredientNames.clear();
+        ingredientIds.clear();
 
         Cursor cursor = database.getAllIngredients();
 
         try {
             while (cursor.moveToNext()) {
+
+                int id = cursor.getInt(
+                        cursor.getColumnIndexOrThrow("id")
+                );
                 String name = cursor.getString(
                         cursor.getColumnIndexOrThrow("name"));
 
@@ -70,6 +91,8 @@ public class PantryActivity extends Activity {
 
                 String unit = cursor.getString(
                         cursor.getColumnIndexOrThrow("unit"));
+
+                ingredientIds.add(id);
 
                 ingredientNames.add(
                         name + " — " + quantity + " " + unit);
