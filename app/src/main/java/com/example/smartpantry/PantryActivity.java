@@ -53,8 +53,9 @@ public class PantryActivity extends Activity {
 
             int ingredientId = ingredientIds.get(position);
 
-            Intent intent = new android.content.Intent(PantryActivity.this, EditIngredientActivity.class);
-            intent.putExtra("ingredient_id", (int) id);
+            Intent intent = new Intent(PantryActivity.this, EditIngredientActivity.class);
+
+            intent.putExtra("ingredient_id", ingredientId);
 
             startActivity(intent);
         });
