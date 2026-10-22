@@ -4,6 +4,7 @@ package com.example.smartpantry;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Toast;
+import android.content.Intent;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -31,8 +32,10 @@ public class MainActivity extends AppCompatActivity {
         btnSettings = findViewById(R.id.btnSettings);
 
         // Temporary actions until we build the other screens
-        btnMyPantry.setOnClickListener(v ->
-                showMessage("My Pantry"));
+        btnMyPantry.setOnClickListener(v -> {
+            startActivity(new Intent(MainActivity.this,
+                    PantryActivity.class));
+        });
 
         btnAddIngredient.setOnClickListener(v ->
                 showMessage("Add Ingredient"));
