@@ -3,21 +3,31 @@ package com.example.smartpantry;
 
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.content.Intent;
+import android.database.Cursor;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
+
+
 
     Button btnMyPantry;
     Button btnAddIngredient;
     Button btnSuggestedRecipes;
     Button btnSettings;
 
+    private DatabaseHelper dbHelper;
+    private TextView txtIngredientCount;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        dbHelper = new DatabaseHelper(this);
+        txtIngredientCount = findViewById(R.id.txtIngredientCount);
 
         // Display the home screen
         setContentView(R.layout.activity_main);
@@ -26,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         dbHelper.getWritableDatabase();
 
         // Connect Java to the XML buttons
+        txtIngredientCount = findViewById(R.id.txtIngredientCount);
         btnMyPantry = findViewById(R.id.btnMyPantry);
         btnAddIngredient = findViewById(R.id.btnAddIngredient);
         btnSuggestedRecipes = findViewById(R.id.btnSuggestedRecipes);
@@ -37,8 +48,12 @@ public class MainActivity extends AppCompatActivity {
                     PantryActivity.class));
         });
 
-        btnAddIngredient.setOnClickListener(v ->
-                showMessage("Add Ingredient"));
+        btnAddIngredient.setOnClickListener(v -> {
+            startActivity(new Intent(
+                    MainActivity.this,
+                    AddIngredientActivity.class
+            ));
+        });
 
         btnSuggestedRecipes.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this,
@@ -57,7 +72,33 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void showMessage(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // Refresh the count whenever Home becomes visible
+        updateIngredientCount();
+    }
+
+    private void updateIngredientCount() {
+
+        Cursor cursor = dbHelper.getAllIngredients();
+
+        int count = 0;
+
+        try {
+            while (cursor.moveToNext()) {
+                count++;
+            }
+        } finally {
+            cursor.close();
+        }
+
+        txtIngredientCount.setText(
+                count + (count == 1 ? " ingredient" : " ingredients")
+        );
     }
 }
+
+
+
