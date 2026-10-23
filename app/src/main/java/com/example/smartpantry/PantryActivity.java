@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -19,7 +18,7 @@ public class PantryActivity extends Activity {
     private DatabaseHelper database;
     private ListView listPantry;
     private TextView txtPantryCount;
-    private ArrayAdapter<String> adapter;
+    private PantryAdapter adapter;
     private ArrayList<String> ingredientNames;
     private ArrayList<Integer> ingredientIds;
 
@@ -37,11 +36,7 @@ public class PantryActivity extends Activity {
         ingredientNames = new ArrayList<>();
         ingredientIds = new ArrayList<>();
 
-        adapter = new ArrayAdapter<>(
-                this,
-                android.R.layout.simple_list_item_1,
-                ingredientNames
-        );
+        adapter = new PantryAdapter(this, ingredientNames);
 
         listPantry.setAdapter(adapter);
 

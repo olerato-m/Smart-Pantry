@@ -61,7 +61,10 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp" />
+            android:layout_marginBottom="8dp"
+            android:textColor="#203629"
+            android:textColorHint="#68766B"
+            />
 
         <TextView
             android:id="@+id/txtRecipeIngredients"
@@ -69,7 +72,10 @@
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:lineSpacingExtra="4dp"
-            android:text="Recipe ingredients will appear here." />
+            android:text="Recipe ingredients will appear here."
+            android:textColor="#203629"
+            android:textColorHint="#68766B"
+            />
 
         <TextView
             android:layout_width="match_parent"

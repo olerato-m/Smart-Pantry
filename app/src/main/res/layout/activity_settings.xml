@@ -19,40 +19,40 @@
             android:text="Back" />
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Settings"
-            android:textSize="28sp"
-            android:textStyle="bold"
-            android:textColor="#24382B"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="8dp" />
+            android:layout_marginBottom="8dp"
+            android:text="Settings"
+            android:textColor="#24382B"
+            android:textSize="28sp"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
             android:text="Manage your Smart Pantry Manager app."
-            android:textSize="16sp"
             android:textColor="#526257"
-            android:layout_marginBottom="24dp" />
+            android:textSize="16sp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Application Information"
+            android:textColor="#24382B"
             android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="#24382B" />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/txtAppVersion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Smart Pantry Manager"
-            android:textSize="16sp"
-            android:textColor="#526257"
             android:paddingTop="12dp"
-            android:paddingBottom="24dp" />
+            android:paddingBottom="24dp"
+            android:text="Smart Pantry Manager"
+            android:textColor="#526257"
+            android:textSize="16sp" />
 
         <View
             android:layout_width="match_parent"
@@ -62,27 +62,27 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Data Management"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="#24382B"
             android:layout_marginTop="24dp"
-            android:layout_marginBottom="8dp" />
+            android:layout_marginBottom="8dp"
+            android:text="Data Management"
+            android:textColor="#24382B"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
             android:text="Remove every ingredient from your pantry. Your recipe collection will remain saved."
-            android:textSize="15sp"
             android:textColor="#526257"
-            android:layout_marginBottom="12dp" />
+            android:textSize="15sp" />
 
         <Button
             android:id="@+id/btnClearPantry"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Clear All Pantry Ingredients"
             android:backgroundTint="#B3261E"
+            android:text="Clear All Pantry Ingredients"
             android:textColor="#FFFFFF" />
 
     </LinearLayout>

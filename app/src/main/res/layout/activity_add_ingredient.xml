@@ -24,28 +24,40 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Ingredient name (e.g. Tomatoes)"
-            android:inputType="textCapWords" />
+            android:inputType="textCapWords"
+            android:textColor="#203629"
+            android:textColorHint="#68766B"
+            />
 
         <EditText
             android:id="@+id/editQuantity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Quantity (e.g. 5)"
-            android:inputType="numberDecimal" />
+            android:inputType="numberDecimal"
+            android:textColor="#203629"
+            android:textColorHint="#68766B"
+            />
 
         <EditText
             android:id="@+id/editUnit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Unit (e.g. pieces, grams, cups)"
-            android:inputType="textCapWords" />
+            android:inputType="textCapWords"
+            android:textColor="#203629"
+            android:textColorHint="#68766B"
+            />
 
         <EditText
             android:id="@+id/editExpiry"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Expiry date (e.g. 2026-10-30)"
-            android:inputType="text" />
+            android:inputType="text"
+            android:textColor="#203629"
+            android:textColorHint="#68766B"
+            />
 
         <Button
             android:id="@+id/btnSaveIngredient"

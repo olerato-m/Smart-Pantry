@@ -4,11 +4,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ArrayAdapter;
 
 import java.util.ArrayList;
 
@@ -20,7 +20,7 @@ public class SuggestedRecipesActivity extends Activity {
 
     private ArrayList<Integer> recipeIds;
     private ArrayList<String> recipeNames;
-    private ArrayAdapter<String> adapter;
+    private RecipeAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,11 +37,7 @@ public class SuggestedRecipesActivity extends Activity {
         recipeIds = new ArrayList<>();
         recipeNames = new ArrayList<>();
 
-        adapter = new ArrayAdapter<>(
-                this,
-                android.R.layout.simple_list_item_1,
-                recipeNames
-        );
+        adapter = new RecipeAdapter(this, recipeNames);
 
         listRecipes.setAdapter(adapter);
 

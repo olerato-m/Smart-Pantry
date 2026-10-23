@@ -48,10 +48,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // Keep existing data. Add future database migrations here.
+        // Keeps existing data. Add future database migrations here.
     }
 
-    // Add an ingredient to the pantry.
+    // Adds an ingredient to the pantry.
     public boolean addIngredient(String name, double quantity, String unit, String expiryDate) {
         SQLiteDatabase db = getWritableDatabase();
 
