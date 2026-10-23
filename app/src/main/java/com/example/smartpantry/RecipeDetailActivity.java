@@ -1,4 +1,3 @@
-
 package com.example.smartpantry;
 
 import android.app.Activity;
@@ -14,6 +13,7 @@ public class RecipeDetailActivity extends Activity {
     private TextView txtRecipeName;
     private TextView txtRecipeDescription;
     private TextView txtRecipeInstructions;
+    private TextView txtRecipeIngredients;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,9 +25,9 @@ public class RecipeDetailActivity extends Activity {
         txtRecipeName = findViewById(R.id.txtRecipeName);
         txtRecipeDescription = findViewById(R.id.txtRecipeDescription);
         txtRecipeInstructions = findViewById(R.id.txtRecipeInstructions);
+        txtRecipeIngredients = findViewById(R.id.txtRecipeIngredients);
 
         Button btnBack = findViewById(R.id.btnBack);
-
         btnBack.setOnClickListener(v -> finish());
 
         int recipeId = getIntent().getIntExtra("recipe_id", -1);
@@ -39,6 +39,7 @@ public class RecipeDetailActivity extends Activity {
         }
 
         loadRecipe(recipeId);
+        loadRecipeIngredients(recipeId);
     }
 
     private void loadRecipe(int recipeId) {
@@ -52,14 +53,46 @@ public class RecipeDetailActivity extends Activity {
                 );
                 txtRecipeInstructions.setText(cursor.getString(cursor.getColumnIndexOrThrow("instructions"))
                 );
-            }
-            else{
+            } else {
                 Toast.makeText(this, "Recipe not found.", Toast.LENGTH_SHORT).show();
                 finish();
             }
-        }
-        finally{
+        } finally {
             cursor.close();
         }
     }
-}
+
+        private void loadRecipeIngredients ( int recipeId){
+
+            Cursor cursor = database.getReadableDatabase().rawQuery("SELECT ingredient_name, required_quantity, unit " +
+                    "FROM recipe_ingredients WHERE recipe_id = ?", new String[]{String.valueOf(recipeId)});
+
+            StringBuilder ingredients = new StringBuilder();
+
+            try {
+                while (cursor.moveToNext()) {
+                    String name = cursor.getString(0);
+                    double quantity = cursor.getDouble(1);
+                    String unit = cursor.getString(2);
+
+                    ingredients.append("• ")
+                            .append(quantity)
+                            .append(" ")
+                            .append(unit)
+                            .append(" ")
+                            .append(name)
+                            .append("\n");
+                }
+            } finally {
+                cursor.close();
+            }
+
+            if (ingredients.length() == 0) {
+                txtRecipeIngredients.setText(
+                        "No ingredients listed for this recipe.");
+            } else {
+                txtRecipeIngredients.setText(ingredients.toString());
+            }
+        }
+    }
+
